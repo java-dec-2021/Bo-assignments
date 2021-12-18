@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+
+h1 {
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	border: 2px solid black;
+	height: 400px;
+	width: 400px;
+	
+}
+
+.style {
+	margin-top: 10px;
+}
+
+h3 {
+  text-decoration: underline;
+}
