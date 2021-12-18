@@ -5,13 +5,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>First Spring Project</title>
-<link rel="stylesheet" href="/css/style.css">
+<title>Getting Familiar With Routing</title>
 </head>
 <body>
-<h1>First Spring Project!!!</h1>
-
-<p><c:out value="${5+5}"/></p>
-
+<h1>Getting Familiar With Routing</h1>
 </body>
 </html>

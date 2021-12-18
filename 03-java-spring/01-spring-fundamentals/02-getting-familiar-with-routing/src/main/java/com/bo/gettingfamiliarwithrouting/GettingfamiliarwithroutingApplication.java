@@ -1,13 +1,13 @@
-package com.bo.projectone;
+package com.bo.gettingfamiliarwithrouting;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectoneApplication {
+public class GettingfamiliarwithroutingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectoneApplication.class, args);
+		SpringApplication.run(GettingfamiliarwithroutingApplication.class, args);
 	}
 
 }

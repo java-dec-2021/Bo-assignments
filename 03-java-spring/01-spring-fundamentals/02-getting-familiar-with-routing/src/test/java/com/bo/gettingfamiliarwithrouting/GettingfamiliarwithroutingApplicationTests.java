@@ -1,10 +1,10 @@
-package com.bo.projectone;
+package com.bo.gettingfamiliarwithrouting;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectoneApplicationTests {
+class GettingfamiliarwithroutingApplicationTests {
 
 	@Test
 	void contextLoads() {
