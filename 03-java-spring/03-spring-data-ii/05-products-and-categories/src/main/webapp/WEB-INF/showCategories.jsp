@@ -32,10 +32,10 @@
 	
 	
 	<div>
-		<form action="/addProduct" method="POST">
-			<select name="name" id="name">
+		<form action="/addProductToCategory" method="POST">
+			<select name="productName">
 			<c:forEach items="${ listOfProducts }" var="prod">
-				<option>${ prod.name }</option>
+				<option value="${ prod.id }">${ prod.name }</option>
 			</c:forEach>		
 			</select>	
 			<button>Add</button>

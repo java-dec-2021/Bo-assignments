@@ -1,5 +1,7 @@
 package com.bo.productsandcategories.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,28 +51,38 @@ public class HomeController {
 		return "redirect:/product";
 	}
 	
+	
 	// Show the details of a particular product using the ID
-	@GetMapping("/show/{id}")
-	public String showProduct(@PathVariable("id") Long id, Model viewModel) {
+	@GetMapping("/show/{productId}")
+	public String showProduct(@PathVariable("productId") Long id, Model viewModel, HttpSession session) {
+
+		Product productInSession = this.pService.getOneProduct(id);
+		session.setAttribute("product__id", productInSession.getId());		
 		viewModel.addAttribute("showProduct", this.pService.getOneProduct(id));
 		viewModel.addAttribute("listOfCategories", this.cService.getAllCategories());
+		
+		
 		return "showProducts.jsp";
 	}
+	
 	
 	// Adding a category to a product - Many to Many relationship
-	@PostMapping("/addCategoryToProduct/{id}")
-	public String addCatToProd(@PathVariable("id") Long id) {
-		Category addCatToProduct = this.cService.getOneCategory(id);
-		Product productCategory = this.pService.getOneProduct(id);
-		// Add the addCatToProduct and productCategory together
-		this.pService.addCategoryToProduct(addCatToProduct, productCategory);
-		return "showProducts.jsp";
+	@PostMapping("/addCategoryToProduct")
+	public String addCategory(@RequestParam("categoryName") Long id, HttpSession session) {
+//		Long prodId = (Long)session.getAttribute("product__id");
+		Product prod = this.pService.getOneProduct((Long)session.getAttribute("product__id"));
+		Category cat = this.cService.getOneCategory(id);
+		this.pService.addCategoryToProduct(cat, prod);
+		return "redirect:/product";
 	}
-	
-	
-	
+
 	
 
+	
+	
+	
+	
+	
 	
 	
 	
@@ -89,11 +101,31 @@ public class HomeController {
 	}
 	
 	@GetMapping("/showCategory/{id}")
-	public String showCategory(@PathVariable("id") Long id, Model viewModel) {
+	public String showCategory(@PathVariable("id") Long id, Model viewModel, HttpSession session) {
+		Category categoryInSession = this.cService.getOneCategory(id);
+		session.setAttribute("category__id", categoryInSession.getId());
+		
+		
 		viewModel.addAttribute("showCategory", this.cService.getOneCategory(id));
 		viewModel.addAttribute("listOfProducts", this.pService.getAllProducts());
 		return "showCategories.jsp";
 	}
+
+	
+	
+	
+	// Adding a product to a category - Many to Many relationship
+	@PostMapping("/addProductToCategory") 
+	public String addProduct(@RequestParam("productName") Long id, HttpSession session) {
+		Category category = this.cService.getOneCategory((Long)session.getAttribute("category__id"));
+		Product product = this.pService.getOneProduct(id);
+		this.cService.addProductToCategory(product, category);
+		return "redirect:/category";
+	}
+	
+	
+	
+	
 	
 
 }

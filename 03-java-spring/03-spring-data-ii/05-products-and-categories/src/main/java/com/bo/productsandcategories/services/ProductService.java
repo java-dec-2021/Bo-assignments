@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.bo.productsandcategories.models.Category;
 import com.bo.productsandcategories.models.Product;
+import com.bo.productsandcategories.repositories.CategoryRepository;
 import com.bo.productsandcategories.repositories.ProductRepository;
 
 @Service
 public class ProductService {
 	@Autowired
 	private ProductRepository pRepo;
+	
+	@Autowired 
+	private CategoryRepository cRepo;
 	
 	public List<Product> getAllProducts() {
 		return this.pRepo.findAll();
@@ -28,9 +32,17 @@ public class ProductService {
 	
 	// Add category to product - Many to Many relationship
 	public void addCategoryToProduct(Category category, Product product) {
-		List<Category> categoryAdded = product.getCategories();
-		categoryAdded.add(category);
-		this.pRepo.save(product);
+		product.getCategories().add(category);
+		pRepo.save(product);
+	}
+	
+	
+	
+	
+	
+	
+	public List<Category> findCategoriesNotInProduct(Product product) {
+		return cRepo.findByProductsNotContains(product);
 	}
 	
 

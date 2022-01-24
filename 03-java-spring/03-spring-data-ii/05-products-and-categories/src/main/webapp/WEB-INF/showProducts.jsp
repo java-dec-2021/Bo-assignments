@@ -33,7 +33,7 @@
 	
 	
 	<div>
-		<form action="/addCategoryToProduct/${ category.id }" method="POST">
+		<form action="/addCategoryToProduct" method="POST">
 			<select name="categoryName">
 			<c:forEach items="${ listOfCategories }" var="cat">
 				<option value="${ cat.id }">${ cat.name }</option>
